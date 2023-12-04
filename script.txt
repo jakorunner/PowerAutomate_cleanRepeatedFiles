@@ -1,0 +1,21 @@
+Folder.GetFiles Folder: CARPETA_BUSQUEDA FileFilter: $'''*''' IncludeSubfolders: False FailOnAccessDenied: True SortBy1: Folder.SortBy.Size SortDescending1: True SortBy2: Folder.SortBy.FullName SortDescending2: False SortBy3: Folder.SortBy.NoSort SortDescending3: False Files=> Files
+LOOP FOREACH CurrentItem IN Files
+    IF AnteriorSize = CurrentItem.Size THEN
+        Cryptography.HashFromFile HashAlgorithm: Cryptography.HashAlgorithm.SHA256 Encoding: Cryptography.EncryptionEncoding.Unicode File: AntNombre HashedText=> HashedText_anterior
+        Cryptography.HashFromFile HashAlgorithm: Cryptography.HashAlgorithm.SHA256 Encoding: Cryptography.EncryptionEncoding.Unicode File: CurrentItem.FullName HashedText=> HashedText_current
+        IF HashedText_anterior = HashedText_current THEN
+            DISABLE Display.ShowMessageDialog.ShowMessage Title: $'''HASES IGUALES PARA HOY !!!!!''' Message: HashedText_anterior Icon: Display.Icon.None Buttons: Display.Buttons.OK DefaultButton: Display.DefaultButton.Button1 IsTopMost: False ButtonPressed=> ButtonPressed
+            IF RENOMBRAR_REPETIDO = $'''True''' THEN
+                File.RenameFiles.Rename Files: CurrentItem.FullName NewName: $'''%AntNombre%_____________COPY''' KeepExtension: True IfFileExists: File.IfExists.DoNothing RenamedFiles=> RenamedFiles
+            END
+            IF GENERAR_LISTA = $'''True''' THEN
+                File.WriteText File: $'''%CARPETA_BUSQUEDA%\\Resultados_repetidos.csv''' TextToWrite: $'''%AntNombre%;%CurrentItem.Name%;%CurrentItem.Size%''' AppendNewLine: True IfFileExists: File.IfFileExists.Append Encoding: File.FileEncoding.Unicode
+            END
+            IF BORRAR_FICHEROS = $'''True''' THEN
+                File.Delete Files: AntNombre
+            END
+        END
+    END
+    SET AnteriorSize TO CurrentItem.Size
+    SET AntNombre TO CurrentItem.FullName
+END
