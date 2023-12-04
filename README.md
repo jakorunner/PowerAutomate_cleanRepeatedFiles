@@ -6,7 +6,7 @@ Accept 4 params:
 - Folder (and subfolders).
 - Check if you want a CSV file with the list of repeated files.
 - Check if you want to "rename" with a "tag" attached to the repeated file.
-- Chec if you want to delete repeated files.
+- Check if you want to delete repeated files.
 
   Obviously, some of these checks doesnt work together.
 
