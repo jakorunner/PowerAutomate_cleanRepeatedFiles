@@ -1,5 +1,5 @@
 # PowerAutomate_cleanRepeatedFiles
-PowerAutomate script to identify/clean/move repeated files in folder/s.
+PowerAutomate script to identify/clean/move repeated files in folder/s. Check files by comparision by hash.
 
 
 Accept 4 params:
