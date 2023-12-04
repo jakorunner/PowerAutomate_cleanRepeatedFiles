@@ -8,10 +8,9 @@ Accept 4 params:
 - Check if you want to "rename" with a "tag" attached to the repeated file.
 - Check if you want to delete repeated files.
 
-  Obviously, some of these checks doesnt work together.
+Obviously, some of these checks doesnt work together.
 
-
-  Future improvements:
+Future improvements:
   - Check to determine if you want to analyze subfolders.
   - Full english/spanish support (now some parts are in english, other in spanish).
   -  Customize CSV file name, customize "Tag" for repeated name files (in renaming option).
